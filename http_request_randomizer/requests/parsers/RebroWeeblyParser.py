@@ -27,6 +27,10 @@ class RebroWeeblyParser(UrlParser):
         soup = BeautifulSoup(content, "html.parser")
         table = soup.find("div", attrs={"class": "paragraph", 'style': "text-align:left;"}).find('font', attrs={
             'color': '#33a27f'})
+
+        if table is None:
+            return curr_proxy_list
+
         # Parse Top Proxy List page
         for row in [x for x in table.contents if getattr(x, 'name', None) != 'br']:
             # Make sure it is a Valid Proxy Address

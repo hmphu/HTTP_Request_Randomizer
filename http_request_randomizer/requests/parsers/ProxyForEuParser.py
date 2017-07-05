@@ -25,6 +25,9 @@ class ProxyForEuParser(UrlParser):
         soup = BeautifulSoup(content, "html.parser")
         table = soup.find("table", attrs={"class": "proxy_list"})
 
+        if table is None:
+            return curr_proxy_list
+
         # The first tr contains the field names.
         headings = [th.get_text() for th in table.find("tr").find_all("th")]
 
