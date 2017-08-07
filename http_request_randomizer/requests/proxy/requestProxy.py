@@ -11,6 +11,7 @@ from requests.exceptions import ReadTimeout
 
 from http_request_randomizer.requests.errors.ProxyListException import ProxyListException
 from http_request_randomizer.requests.parsers.FreeProxyParser import FreeProxyParser
+from http_request_randomizer.requests.parsers.ProxyDbParser import ProxyDbParser
 from http_request_randomizer.requests.parsers.ProxyForEuParser import ProxyForEuParser
 from http_request_randomizer.requests.parsers.RebroWeeblyParser import RebroWeeblyParser
 from http_request_randomizer.requests.parsers.SamairProxyParser import SamairProxyParser
@@ -38,6 +39,7 @@ class RequestProxy:
         #####
         parsers = list([])
         parsers.append(FreeProxyParser('http://free-proxy-list.net', timeout=timeout))
+        parsers.append(ProxyDbParser('http://proxydb.net/?protocol=http&anonlvl=1&anonlvl=2', timeout=timeout))
         parsers.append(ProxyForEuParser('http://proxyfor.eu/geo.php', 1.0, timeout=timeout))
         parsers.append(RebroWeeblyParser('http://rebro.weebly.com', timeout=timeout))
         parsers.append(SamairProxyParser('http://samair.ru/proxy/time-01.htm', timeout=timeout))
